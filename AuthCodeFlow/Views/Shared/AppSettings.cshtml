@@ -1,0 +1,22 @@
+﻿@using System.Configuration;
+
+@{
+    var appConfig = new
+    {
+        apiUri = ConfigurationManager.AppSettings["app:ApiUri"],
+        redirectUri = ConfigurationManager.AppSettings["app:RedirectUri"],
+
+        b2cClientId = ConfigurationManager.AppSettings["b2c:ClientId"],
+        b2cScopes = string.Join(" ", ConfigurationManager.AppSettings["b2c:Scopes"].Split(' ').Select(s =>
+            string.Format(ConfigurationManager.AppSettings["b2c:ScopePart"],
+            ConfigurationManager.AppSettings["b2c:Tenant"], ConfigurationManager.AppSettings["app:ApiAppId"], s)).ToArray()),
+        b2cAuthorizationEndPoint = string.Format(
+            ConfigurationManager.AppSettings["b2c:AuthorizationEndPoint"],
+            ConfigurationManager.AppSettings["b2c:Tenant"],
+            ConfigurationManager.AppSettings["b2c:SignupinPolicy"])
+    };
+}
+
+<script>
+        window['appConfig'] = @appConfig.SerializeObjectToJson();
+</script>

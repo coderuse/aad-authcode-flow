@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript">
+    (function () {
+        window.onpopstate = function () { };
+    }());
+</script>
+
+@section scripts {
+    
+    <script src="~/Scripts/msal.js"></script>
+    <script src="~/Scripts/login.js"></script>
+}
